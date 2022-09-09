@@ -3,3 +3,12 @@
 // 78 -> 2
 // 89126 -> 5
 
+Console.WriteLine("Введите число:  ");
+int n = Convert.ToInt32(Console.ReadLine());
+int count = 0;
+
+for (; 0 < n; count++)
+{
+    n /= 10;
+}
+Console.WriteLine(count);
