@@ -1,7 +1,7 @@
 ﻿// Задача 57: Составить частотный словарь элементов двумерного массива. 
 // Частотный словарь содержит информацию о том, сколько раз встречается элемент входных данных.
 
-void PrintTextToString(String text)
+void PrintTextToString(string text)
 {
     Console.Write(text);
 }
@@ -12,20 +12,21 @@ int UserInput()
     return a;
 }
 
-int[,] ReplacingRowsColumn(int[,] arr)
+int NumberCounter(int[,] arr, int n, int a, int b)
 {
-    int[,] arrA = new int[arr.GetLength(0), arr.GetLength(1)];
-    for (int i = 0; i < arrA.GetLength(0); i++)
+    int count = 0;
+    for (int i = 0; i < arr.GetLength(0); i++)
     {
-        for (int j = 0; j < arrA.GetLength(1); j++)
+        for (int j = 0; j < arr.GetLength(1); j++)
         {
-            arrA[j, i] = arr[i, j];
+            if (n == arr[i, j]) count++;
+
         }
     }
-    return arrA;
+    return count;
 }
 
-int[,] FillingAnArray(int m, int n, int min, int max)
+int[,] FillArray(int m, int n, int min, int max)
 {
     int[,] arr = new int[m, n];
     for (int i = 0; i < arr.GetLength(0); i++)
@@ -45,7 +46,8 @@ void PrintArray(int[,] arr)
     {
         for (int j = 0; j < arr.GetLength(1); j++)
         {
-            Console.Write($"{arr[i, j]} ");
+            int count = NumberCounter(arr, arr[i, j], i, j);
+            Console.Write($"{arr[i, j]}({i},{j}) = {count} | ");
         }
         Console.WriteLine();
     }
@@ -60,8 +62,5 @@ int first = UserInput();
 PrintTextToString("Введите конечное значение массива: ");
 int second = UserInput();
 Console.Clear();
-int[,] array = FillingAnArray(line, column, first, second);
+int[,] array = FillArray(line, column, first, second);
 PrintArray(array);
-Console.WriteLine();
-int[,] newArray = ReplacingRowsColumn(array);
-PrintArray(newArray);
